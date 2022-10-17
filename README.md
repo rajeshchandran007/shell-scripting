@@ -2,7 +2,7 @@
 
 Welcome to shell/bash scripting
 
-# Git Commands used
+## Git Commands used
 ...
 
     Git clone url (Will clone/download the whole repository)
@@ -16,3 +16,5 @@ Welcome to shell/bash scripting
     git pull (pull the changes from repo only since last clone)
 
 ...
+
+### Project Automation will be done with git 
