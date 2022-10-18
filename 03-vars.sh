@@ -13,14 +13,12 @@ echo $a
 echo ${a} 
 echo "$a"
 echo "${b}"
-echo '${a}'
+echo '${a}' # Whenever you use single quotes on variable, the power of special characters will be taken down.
 
 echo "prining the value of c : $c"
-
-# Whenever you use single quotes on variable, the power of special characters will be taken down.
+    
 # Here $ is a special character to print variables.
 
 # rm -rf /data/${OPT_VARIABLE}  # rm -rf /data/
-
 
 # Note: local variables will have higher priority than export variables ( environment variables )
