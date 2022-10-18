@@ -2,7 +2,7 @@
 
 ### Special Variables in Linux are : $0 to $n , $* , $@ , $# , $$ 
 
-echo $0   # Prints the script name that you're running
+echo -e "\e[31m Name of the Script: \e[0m"$0   # Prints the script name that you're running
 echo $1   # First argument from the command line
 echo $2   # Second argument from the command line
 
