@@ -2,9 +2,10 @@
 
 TODAY_DATE="$(date +%F)"
 NO_OF_USERS="$(who | wc -l)"
-A=100
-X = "${A}"
 
 echo "Good Morning, Todays date is ${TODAY_DATE}"
 echo "Number of sessions opened are : ${NO_OF_USERS}"
-echo "Value of X : ${X}"
+
+A=100
+B = "${A}"
+echo "Value of B : ${B}"
