@@ -19,7 +19,7 @@ case $ACTION in
     echo "Stop the script" 
     ;;
     *)
-    echo "Give start or stop as the input"
+    echo -e "\e[31m Give start or stop as the input\e[0m"
     
 esac
 
