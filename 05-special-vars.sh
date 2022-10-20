@@ -11,6 +11,8 @@ echo "All the arguments: "$@   # Gives you all the arguments used in the script
 echo "No of arguments: "$#   # Gves you the number of arguments users
 echo "Process ID: "$$   # Gives you the PID of the current process
 
+# $? will give the exit code of the previous command
+
 # On command you can supply 9 variables 
 # Ex  
 #  sh abc.sh 10 20 30 40
