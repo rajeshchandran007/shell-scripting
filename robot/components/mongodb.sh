@@ -5,7 +5,7 @@ echo "I am the mongodb component."
 
 COMPONENT=mongodb
 
-source ./common.sh
+source components/common.sh
 
 echo -n "Installing nginx:"
 yum install nginx -y &>> $LOGFILE
