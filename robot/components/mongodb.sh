@@ -7,37 +7,17 @@ COMPONENT=mongodb
 
 source components/common.sh
 
-echo -n "Installing nginx:"
-yum install nginx -y &>> $LOGFILE
-
+echo -n "Configuring the project's mongodb repo:"
+curl -s -o /etc/yum.repos.d/$COMPONENT.repo https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/mongo.repo
 stat $?
 
-echo -n "Downloading project components:"
-curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
-
+echo -n "Installing $COMPONENT"
+yum install -y $COMPONENT-org &>> $LOGFILE
 stat $?
 
-echo -n "Performing cleanup:"
-cd /usr/share/nginx/html
-rm -rf * &>> $LOGFILE
-
+echo -n "Restarting $COMPONENT"
+systemctl enable mongod &>> $LOGFILE
+systemctl start mongod &>> $LOGFILE
 stat $?
 
-echo -n "Unzipping the $COMPONENT:"
-unzip /tmp/$COMPONENT.zip &>> $LOGFILE
-mv $COMPONENT-main/* .
-mv static/* .
-rm -rf $COMPONENT-main README.md &>> $LOGFILE
 
-stat $?
-
-echo -n "Placing the config file"
-mv localhost.conf /etc/nginx/default.d/roboshop.conf
-
-stat $?
-
-echo -n "restarting nginx:"
-systemctl enable nginx &>> $LOGFILE
-systemctl start nginx &>> $LOGFILE
-
-stat $?
