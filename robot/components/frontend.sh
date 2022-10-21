@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo "I am the frontend component."
 
 UID = $(id -u)
