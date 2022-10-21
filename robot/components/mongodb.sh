@@ -16,7 +16,7 @@ yum install -y $COMPONENT-org &>> $LOGFILE
 stat $?
 
 echo -n "Updating $COMPONENT config file for 0.0.0.0"
-sudo sed -i -e 's/127.0.0.1/0.0.0.0/' mongod.conf
+sudo sed -i -e 's/127.0.0.1/0.0.0.0/' mongodb.conf
 stat $?
 
 echo -n "Restarting $COMPONENT"
