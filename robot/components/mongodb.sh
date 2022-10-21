@@ -30,7 +30,7 @@ stat $?
 
 echo -n "Unzip $COMPONENT.zip"
 cd /tmp
-unzip mongodb.zip &>> $LOGFILE
+unzip -o mongodb.zip &>> $LOGFILE
 stat $?
 
 echo -n "Inject the schema for tables catalogue and users in $COMPONENT"
