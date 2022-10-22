@@ -40,7 +40,7 @@ npm install &>> $LOGFILE
 stat $?
 
 echo -n "Changing permission to $APPUSER"
-chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT &>> $LOGFILE
+chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT && chmod -R 775 /home/$APPUSER/$COMPONENT &>> $LOGFILE
 stat $?
 
 echo -n "Configuring systemd file"
