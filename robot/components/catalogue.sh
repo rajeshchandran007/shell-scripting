@@ -40,6 +40,23 @@ npm install &>> $LOGFILE
 stat $?
 
 echo -n "Changing permission to $APPUSER"
-chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
+chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT &>> $LOGFILE
 stat $?
+
+echo -n "Configuring systemd file"
+sed -e 's/MONGO_DNSNAME/172.31.88.86/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
+stat $?
+
+echo -n "Moving systemd file to /etc folder"
+mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service &>> $LOGFILE
+stat $?
+
+echo -n "Starting the $COMPONENT service"
+systemctl daemon-reload &>> $LOGFILE
+systemctl start $COMPONENT &>> $LOGFILE
+systemctl enable $COMPONENT &>> $LOGFILE
+systemctl status $COMPONENT -l &>> $LOGFILE
+stat $?
+
+echo -e "\e[32m -----$COMPONENT installation completed-----\e[0m"
 
