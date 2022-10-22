@@ -34,7 +34,12 @@ rm -rf $COMPONENT
 mv $COMPONENT-main $COMPONENT
 stat $?
 
-# echo -n "Installing node js component"
-# cd /home/roboshop/$COMPONENT
-# npm install &>> $LOGFILE
-# stat $?
+echo -n "Installing node js component"
+cd /home/$APPUSER/$COMPONENT
+npm install &>> $LOGFILE
+stat $?
+
+echo -n "Changing permission to $APPUSER"
+chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
+stat $?
+
