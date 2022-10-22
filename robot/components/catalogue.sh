@@ -27,6 +27,10 @@ stat $?
 echo -n "Moving the component $COMPONENT to $APPUSER home directory"
 cd /home/roboshop
 unzip -o /tmp/$COMPONENT.zip &>> $LOGFILE
+stat $?
+
+echo -n "Performing cleanup"
+rm -rf $COMPONENT
 mv $COMPONENT-main $COMPONENT
 stat $?
 
