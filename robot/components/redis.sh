@@ -13,7 +13,6 @@ yum install redis-6.2.7 -y &>> $LOGFILE
 stat $?
 
 echo -n "Update config file for whitelisting:"
-vim /etc/redis.conf
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/$COMPONENT.conf &>> $LOGFILE
 stat $?
 
