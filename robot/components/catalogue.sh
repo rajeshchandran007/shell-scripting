@@ -15,7 +15,7 @@ stat $?
 id $APPUSER &>> $LOGFILE
 if [ $? -ne 0 ] ; then
     echo -n "Adding User:"
-    useradd $APPUSER
+    useradd $APPUSER &>> $LOGFILE
     stat $?
 fi
 
