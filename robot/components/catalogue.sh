@@ -44,7 +44,7 @@ chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT && chmod -R 775 /home/$APPU
 stat $?
 
 echo -n "Configuring systemd file"
-sed -e 's/MONGO_DNSNAME/172.31.88.86/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
+sed -i -e 's/MONGO_DNSNAME/172.31.88.86/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
 stat $?
 
 echo -n "Moving systemd file to /etc folder"
