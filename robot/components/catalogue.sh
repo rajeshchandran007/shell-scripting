@@ -21,7 +21,7 @@ fi
 
 
 echo -n "Downloading project component $COMPONENT:"
-curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 stat $?
 
 echo -n "Moving the component $COMPONENT to $APPUSER home directory"
