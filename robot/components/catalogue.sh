@@ -13,9 +13,13 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOGFILE
 yum install nodejs -y &>> $LOGFILE
 stat $?
 
-echo -n "Adding User:"
-useradd $APPUSER
-stat $?
+id $APPUSER &>> $LOGFILE
+if [ $? -ne 0 ] ; then
+    echo -n "Adding User:"
+    useradd $APPUSER
+    stat $?
+fi
+
 
 echo -n "Downloading project component $COMPONENT:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
