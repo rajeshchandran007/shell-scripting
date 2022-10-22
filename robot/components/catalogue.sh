@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "I am the frontend component."
+echo "I am the catalogue component."
 
 COMPONENT=catalogue
 APPUSER=roboshop
