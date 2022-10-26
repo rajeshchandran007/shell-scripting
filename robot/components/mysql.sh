@@ -23,7 +23,7 @@ mysql -uroot -pRoboShop@1 &>> $LOGFILE
 if [ $? -ne 0 ]
     echo -n "Changing the default password:"
     TEMP_PWD=$(grep 'temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}')
-    ALTER USER 'root@localhost' IDENTIFIED BY 'RoboShop@1' ; | mysql --connect-expired-password -uroot -p"${TEMP_PWD}" &>> $LOGFILE
+    echo "ALTER USER 'root@localhost' IDENTIFIED BY 'RoboShop@1'" ; | mysql --connect-expired-password -uroot -p"${TEMP_PWD}" &>> $LOGFILE
     stat $?
 fi
 
