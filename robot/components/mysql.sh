@@ -19,7 +19,7 @@ echo -n "Start $COMPONENT service:"
 systemctl enable mysqld && systemctl start mysqld
 stat $?
 
-show databases | mysql -uroot -pRoboShop@1 &>> $LOGFILE
+mysql -uroot -pRoboShop@1 | show databases; &>> $LOGFILE
 if [ $? -ne 0 ]
     echo -n "Changing the default password:"
     TEMP_PWD=$(grep 'temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}')
@@ -37,7 +37,7 @@ fi
 echo -n "Download the $COMPONENT Schema:"
 curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
 cd /tmp
-unzip -o $COMPONENT.zip
+unzip -o $COMPONENT.zip &>> $LOGFILE
 stat $?
 
 echo -n "Inject the $COMPONENT Schema:"
