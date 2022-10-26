@@ -19,7 +19,7 @@ echo -n "Start $COMPONENT service:"
 systemctl enable mysqld && systemctl start mysqld
 stat $?
 
-echo "show databases;" | mysql -uroot -pRoboShop@1 &>> $LOGFILE
+echo show databases | mysql -uroot -pRoboShop@1 &>> $LOGFILE
 if [ $? -ne 0 ]
     echo -n "Changing the default password:"
     TEMP_PWD=$(grep 'temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}')
@@ -27,7 +27,7 @@ if [ $? -ne 0 ]
     stat $?
 fi
 
-echo "show plugins" | mysql -uroot -pRoboShop@1 | grep validate_password &>> $LOGFILE
+echo show plugins | mysql -uroot -pRoboShop@1 | grep validate_password &>> $LOGFILE
 if [ $? -eq 0 ]
     echo -n "Uninstall the password validate plugin:"
     uninstall plugin validate_password; | mysql --connect-expired-password -uroot -pRoboShop@1 &>> $LOGFILE
