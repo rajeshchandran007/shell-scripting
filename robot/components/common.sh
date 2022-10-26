@@ -69,7 +69,7 @@ NPM_INSTALL() {
 
 CONFIGURE_SERVICE() {
     echo -n "Configuring systemd file"
-    sed -i -e 's/MONGO_DNSNAME/172.31.88.86/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
+    sed -i -e 's/MONGO_DNSNAME/172.31.88.86/' -e 's/MONGO_ENDPOINT/172.31.88.86/' -e 's/REDIS_ENDPOINT/172.31.84.137/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
     stat $?
 
     echo -n "Moving systemd file to /etc folder"

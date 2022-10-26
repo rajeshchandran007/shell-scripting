@@ -18,7 +18,8 @@ stat $?
 
 echo -n "Start $COMPONENET service:"
 systemctl enable $COMPONENT &>> $LOGFILE
-systemctl start $COMPONENT &>> $LOGFILE
+systemctl daemon-reload &>> $LOGFILE
+systemctl restart $COMPONENT &>> $LOGFILE
 systemctl status $COMPONENT -l &>> $LOGFILE
 stat $?
 
