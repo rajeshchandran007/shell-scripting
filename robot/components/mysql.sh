@@ -21,14 +21,14 @@ DEF_ROOT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk -F ' '
 
 # I only want to change the default password only for the first time.
 # How do I come to know whether the password is changed or not.
-mysql -uroot -p${1} | echo show databases &>> $LOGFILE 
+echo show databases | mysql -uroot -p${1} &>> $LOGFILE 
 if [ $? -ne 0 ] ; then 
     echo -n "Reset Root Password"
     echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${1}';" | mysql  --connect-expired-password  -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE 
     stat $? 
 fi 
 
-mysql -uroot -p${1} | echo show plugins | grep validate_password; &>> $LOGFILE 
+echo show plugins | mysql -uroot -p${1} | grep validate_password; &>> $LOGFILE 
 if [ $? -eq 0 ] ; then 
     echo -n "Uninstalling Password Validate Plugin: "
     echo "uninstall plugin validate_password;" | mysql  --connect-expired-password  -uroot -p${1} &>> $LOGFILE 
