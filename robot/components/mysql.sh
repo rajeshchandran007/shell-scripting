@@ -20,7 +20,7 @@ systemctl enable mysqld && systemctl start mysqld
 stat $?
 
 echo -n "Changing the default password:"
-grep 'temporary password' /var/log/mysqld.log
+grep 'temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}'
 stat $?
 
 #( Copy that password )
