@@ -1,28 +1,24 @@
-#!/bin/bash
-
-echo "I am the redis component."
+#!/bin/bash 
+set -e 
 
 COMPONENT=redis
-APPUSER=roboshop
 
 source components/common.sh
 
-echo -n "Installing $COMPONENT:"
+echo -n "Configuring $COMPONENT repo:"
 curl -L https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>> $LOGFILE
-yum install redis-6.2.7 -y &>> $LOGFILE
-stat $?
+stat $? 
 
-echo -n "Update config file for whitelisting:"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/$COMPONENT/$COMPONENT.conf &>> $LOGFILE
-stat $?
+echo -n "Installing $COMPONENT:"
+yum install redis-6.2.7 -y  &>> $LOGFILE
+stat $? 
 
-echo -n "Start $COMPONENET service:"
-systemctl enable $COMPONENT &>> $LOGFILE
-systemctl daemon-reload &>> $LOGFILE
-systemctl restart $COMPONENT &>> $LOGFILE
-systemctl status $COMPONENT -l &>> $LOGFILE
-stat $?
+echo -n "Whitelisting redis to others:"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
+stat $? 
 
-
-
-
+echo -n "Starting $COMPONENT service:"
+systemctl daemon-reload 
+systemctl enable redis 
+systemctl restart redis 
+stat $? 
