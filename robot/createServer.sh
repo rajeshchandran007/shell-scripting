@@ -16,9 +16,20 @@ echo "Security Group ID: $SG_ID"
 
 # aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SGID  --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}"  --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]"| jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g'
 
-PRIVATE_IP="$(aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]"| jq ."Instances[].PrivateIpAddress" | sed -e 's/"//g')"
-echo "Private IP: $PRIVATE_IP"
+CREATE_SERVER() {
+    PRIVATE_IP="$(aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]"| jq ."Instances[].PrivateIpAddress" | sed -e 's/"//g')"
+    echo "Private IP: $PRIVATE_IP"
 
-sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/$COMPONENT/" route53.json > /tmp/dns.json 
+    sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/$COMPONENT/" route53.json > /tmp/dns.json 
 
-aws route53 change-resource-record-sets --hosted-zone-id $HOSTED-ZONE-ID --change-batch file:///tmp/dns.json | jq
+    aws route53 change-resource-record-sets --hosted-zone-id $HOSTED-ZONE-ID --change-batch file:///tmp/dns.json | jq
+}
+
+if [ "$1" == "all" ]; then 
+    for component in frontend catalogue cart user shipping payment mongodb mysql rabbitmq redis; do 
+        COMPONENT=$component
+        CREATE_SERVER
+    done 
+else 
+        CREATE_SERVER 
+fi 
