@@ -17,3 +17,5 @@ echo "Security Group ID: $SG_ID"
 
 PRIVATE_IP="$(aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]"| jq ."Instances[].PrivateIpAddress" | sed -e 's/"//g')"
 echo "Private IP: $PRIVATE_IP"
+
+sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/$COMPONENT/" route53.json > /tmp/dns.json 
