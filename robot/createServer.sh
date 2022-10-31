@@ -6,6 +6,7 @@ if [ -z "$1" ]; then
 fi 
 
 COMPONENT=$1
+HOSTED-ZONE-ID="Z00636481OT8FNJLH82AQ"
 
 AMI_ID="$(aws ec2 describe-images --region us-east-1 --filters "Name=name,Values=DevOps-LabImage-CentOS7" | jq ".Images[].ImageId" | sed -e 's/"//g')"
 echo "AMI ID: $AMI_ID"
@@ -19,3 +20,5 @@ PRIVATE_IP="$(aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro 
 echo "Private IP: $PRIVATE_IP"
 
 sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/$COMPONENT/" route53.json > /tmp/dns.json 
+
+aws route53 change-resource-record-sets --hosted-zone-id $HOSTED-ZONE-ID --change-batch file:///tmp/dns.json | jq
