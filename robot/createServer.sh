@@ -6,7 +6,7 @@ if [ -z "$1" ]; then
 fi 
 
 COMPONENT=$1
-HOSTED-ZONE-ID="Z00636481OT8FNJLH82AQ"
+HOSTED-ZONE-ID="Z0048491B6B3G2QNCSRQ"
 
 AMI_ID="$(aws ec2 describe-images --region us-east-1 --filters "Name=name,Values=DevOps-LabImage-CentOS7" | jq ".Images[].ImageId" | sed -e 's/"//g')"
 echo "AMI ID: $AMI_ID"
