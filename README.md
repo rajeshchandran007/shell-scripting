@@ -19,5 +19,4 @@ Text
 "
 
 
-
 ### Project Automation will be done with git 
