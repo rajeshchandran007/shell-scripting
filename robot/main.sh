@@ -1,7 +1,3 @@
-#!/bin/bash
-
-echo "--- I am the main.sh script ---"
-
-# Call the required script here
+#!/bin/bash 
 
 bash components/$1.sh

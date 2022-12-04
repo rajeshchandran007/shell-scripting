@@ -1,13 +1,8 @@
-#!/bin/bash
-
-echo "I am the user component."
+#!/bin/bash 
 
 COMPONENT=user
-APPUSER=roboshop
-
 source components/common.sh
-
+APPUSER=roboshop
 NODEJS
 
-echo -e "\e[32m -----$COMPONENT installation completed-----\e[0m"
-
+echo -e "\e[32m __________ $COMPONENT Installation Completed _________ \e[0m"

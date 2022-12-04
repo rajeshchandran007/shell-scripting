@@ -19,7 +19,7 @@ stat() {
 
 NODEJS() {
     echo -n "Configuring Node JS:"
-    curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -  &>> $LOGFILE
+    curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -   &>> $LOGFILE
     stat $? 
 
     echo -n "Installing Nodejs: "
@@ -80,9 +80,7 @@ PYTHON() {
 
     # Configures Services
     CONFIGURE_SERVICE
-
 }
-
 
 CREATE_USER() {
     id $APPUSER &>> $LOGFILE 

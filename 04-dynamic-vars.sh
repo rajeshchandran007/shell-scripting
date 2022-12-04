@@ -5,7 +5,3 @@ NO_OF_USERS="$(who | wc -l)"
 
 echo "Good Morning, Todays date is ${TODAY_DATE}"
 echo "Number of sessions opened are : ${NO_OF_USERS}"
-
-A=100
-B="${A}"
-echo "Value of B : ${B}"

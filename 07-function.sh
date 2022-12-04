@@ -1,21 +1,22 @@
 #!/bin/bash
 
-#Declaring a function
+# Declaring a function 
 
 sample() {
-
-    echo "This msg is from Sample Function"
-
+    echo "I am msg from function named sample"
 }
 
+
+#Calling function sample
 sample
 
 stat() {
-    echo "Load avarage on the system is: $(uptime | awk -F : '{print $4}' | awk -F , '{print $1}')"
-    echo "No of users signed in: $(who | wc -l)"
+    echo "Load Average on the system is $(uptime | awk -F : '{print $NF}' | awk -F , '{print $1}')"
+    echo "Number of logged in sessions is : $(who  |wc -l)"
     echo "Function stat is completed"
-    echo "...Calling sample function from here..."
+    echo " . . . . Calling sample function . . . . ."
     sample
 }
 
-stat
+#calling stat function
+stat 
