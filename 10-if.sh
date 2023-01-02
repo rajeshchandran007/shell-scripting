@@ -37,7 +37,20 @@ else
 
 fi 
 
+d=$2
+if [ "$d" -eq "10" ] ; then 
+    echo "value of d is 10"
 
+elif [ "$d" -eq "20" ] ; then 
+    echo "value of d is 20"
+
+elif [ "$d" -eq "30" ] ; then 
+    echo "value of d is 30"
+
+else 
+    echo "Value of d is not 10 or 20 or 30"
+
+fi 
 
 
 
